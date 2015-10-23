@@ -1,0 +1,107 @@
+﻿<Window x:Class="Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfGhost="clr-namespace:WpfGhost;assembly=WpfGhost.SplitView"
+        Title="SplitView demo application - (abdelkarim.se@gmail.com)"
+        Height="600"
+        Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <Geometry x:Key="MarkupIconShape">
+            M 0,0 L0,9 L9,9 L9,0 Z
+            M 1,1 L1,8 L8,8 L8,1 Z
+            M 3,3 L4,3 L4,4 L3,4 Z
+            M 3,4 L3,5 L2,5 L2,4 Z
+            M 3,5 L4,5 L4,6 L3,6 Z
+            M 5,3 L6,3 L6,4 L5,4 Z
+            M 7,4 L7,5 L6,5 L6,4 Z
+            M 5,5 L6,5 L6,6 L5,6 Z
+        </Geometry>
+
+        <Geometry x:Key="EditorSplitterGripShape">
+            M 0,5 L0,6 L11,6 L11,5 L6,5 L6,3 L8,3 L8,2 L7,2 L7,1 L6,1 L6,0 L5,0 L5,1 L4,1 L4,2 L3,2 L3,3 L5,3 L5,5 Z
+        M 0,8 L0,7 L11,7 L11,8 L6,8 L6,10 L8,10 L8,11 L7,11 L7,12 L6,12 L6,13 L5,13 L5,12 L4,12 L4,11 L3,11 L3,10 L5,10 L5,8 Z
+        </Geometry>
+
+        <Geometry x:Key="DesignIconShape">
+            M 0,0 L9,0 L9,5 L8,5 L8,1 L1,1 L1,8 L5,8 L5,9 L0,9 Z
+                M 7,6 L9,6 L9,7 L10,7 L10,9 L9,9 L9,10 L7,10 L7,9 L6,9 L6,7 L7,7 Z
+        </Geometry>
+    </Window.Resources>
+
+    <Grid>
+        <wpfGhost:SplitView Orientation="Horizontal">
+            <wpfGhost:SplitView.View2Header>
+                <DockPanel>
+                    <Path Fill="Black"
+                              Width="10"
+                              DockPanel.Dock="Left"
+                              Height="10"
+                              Data="{StaticResource DesignIconShape}"
+                              SnapsToDevicePixels="True" />
+                    <TextBlock Text="Design" Margin="2,0,0,0" 
+                                   Visibility="{Binding ElementName=container, Path=IsHorizontal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </DockPanel>
+            </wpfGhost:SplitView.View2Header>
+            <wpfGhost:SplitView.View1Header>
+                <DockPanel>
+                    <Path Fill="Black"
+                              Width="10"
+                              Height="10"
+                              DockPanel.Dock="Left"
+                              Data="{StaticResource MarkupIconShape}"
+                              SnapsToDevicePixels="True" />
+                    <TextBlock Text="XAML"
+                                   Margin="2,0,0,0"
+                                   Visibility="{Binding ElementName=container, Path=IsHorizontal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </DockPanel>
+            </wpfGhost:SplitView.View1Header>
+            <wpfGhost:SplitView.View2>
+                <Border Background="Blue" />
+            </wpfGhost:SplitView.View2>
+            <wpfGhost:SplitView.View1>
+                <Border Background="Red" />
+            </wpfGhost:SplitView.View1>
+        </wpfGhost:SplitView>
+
+        <!--<primitives:SplitterContainer x:Name="container"
+                                      Visibility="Visible"
+                                      Orientation="Horizontal">
+            <primitives:SplitterContainer.View2Header>
+                <DockPanel>
+                    <Path Fill="Black"
+                              Width="10"
+                              DockPanel.Dock="Left"
+                              Height="10"
+                              Data="{StaticResource DesignIconShape}"
+                              SnapsToDevicePixels="True" />
+                    <TextBlock Text="Design" Margin="2,0,0,0" 
+                                   Visibility="{Binding ElementName=container, Path=IsHorizontal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </DockPanel>
+            </primitives:SplitterContainer.View2Header>
+            <primitives:SplitterContainer.View1Header>
+                <DockPanel>
+                    <Path Fill="Black"
+                              Width="10"
+                              Height="10"
+                              DockPanel.Dock="Left"
+                              Data="{StaticResource MarkupIconShape}"
+                              SnapsToDevicePixels="True" />
+                    <TextBlock Text="XAML"
+                                   Margin="2,0,0,0"
+                                   Visibility="{Binding ElementName=container, Path=IsHorizontal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </DockPanel>
+            </primitives:SplitterContainer.View1Header>
+            <primitives:SplitterContainer.View2>
+                <TextBox AcceptsReturn="True" AcceptsTab="True" x:Name="View1">
+                    Design
+                </TextBox>
+            </primitives:SplitterContainer.View2>
+            <primitives:SplitterContainer.View1>
+
+                <TextBox AcceptsReturn="True" AcceptsTab="True" />
+            </primitives:SplitterContainer.View1>
+        </primitives:SplitterContainer>-->
+    </Grid>
+</Window>
